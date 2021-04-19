@@ -247,6 +247,14 @@ public class AudioManager : MonoBehaviour
             s.source.spatialBlend = s.spatialBlend;
             s.source.minDistance = s.spatialMinDist;
             s.source.maxDistance = s.spatialMaxDist;
+
+            s.source.rolloffMode = s.rollOffIndex switch
+            {
+                0 => AudioRolloffMode.Logarithmic,
+                1 => AudioRolloffMode.Linear,
+                2 => AudioRolloffMode.Custom,
+                _ => AudioRolloffMode.Custom,
+            };
         }
     }
     public void RegisterSound(Sound s){
@@ -267,5 +275,13 @@ public class AudioManager : MonoBehaviour
         s.source.spatialBlend = s.spatialBlend;
         s.source.minDistance = s.spatialMinDist;
         s.source.maxDistance = s.spatialMaxDist;
+
+        s.source.rolloffMode = s.rollOffIndex switch
+        {
+            0 => AudioRolloffMode.Logarithmic,
+            1 => AudioRolloffMode.Linear,
+            2 => AudioRolloffMode.Custom,
+            _ => AudioRolloffMode.Custom,
+        };
     }
 }

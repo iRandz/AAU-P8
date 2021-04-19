@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 using Tobii.Gaming;
@@ -37,9 +39,32 @@ public class GazeAwareObject : MonoBehaviour
     private bool hasFocus;
     private bool _stillLookedAt = false;
     
-    // Other
+    // Logging
     private float _cumulativeTimer = 0;
+
+    private class LoggingObjectContainer
+    {
+        public string Name;
+        public float TotalGazeDuration;
+
+        public LoggingObjectContainer(string nameIn, float durationIn)
+        {
+            Name = nameIn;
+            TotalGazeDuration = durationIn;
+        }
+    }
+
+    private static List<LoggingObjectContainer> LoggingList = new List<LoggingObjectContainer>();
     
+    // CSV
+    private static string basePath;
+    private static string path;
+    private static string directory;
+    private static string currentEntry;
+    private const string fileName = "GazeObjects.csv";
+    private const string sep = ";";
+    private const string headers = "Names;GazeDuration";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,10 +76,14 @@ public class GazeAwareObject : MonoBehaviour
 
         playerTrans = playerCamera.GetComponent<Transform>();
         playerCam = playerCamera.GetComponent<Camera>();
-
         _collider = GetComponent<Collider>();
-        
         _gazeAware = gameObject.GetComponent<GazeAware>();
+        
+        // Logging
+        basePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        path = basePath + "/LoggingData";
+        directory = path;
+        LoggingList.Add(new LoggingObjectContainer(this.name, 0));
     }
 
     // Update is called once per frame
@@ -98,6 +127,7 @@ public class GazeAwareObject : MonoBehaviour
         if (_stillLookedAt && !hasFocus)
         {
             _stillLookedAt = false;
+            UpdateLoggingValues();
             notLookedAtEvent.Invoke();
         }
 
@@ -108,6 +138,23 @@ public class GazeAwareObject : MonoBehaviour
     }
 
     // Private functions
+    [ContextMenu("Log")]
+    private void Test()
+    {
+        SaveLogs();
+    }
+
+    private void UpdateLoggingValues()
+    {
+        foreach (var gazeObject in LoggingList)
+        {
+            if (gazeObject.Name == this.name)
+            {
+                gazeObject.TotalGazeDuration = _cumulativeTimer;
+            }
+        }
+    }
+    
     private IEnumerator CheckLookedAtDuration(float durationIn, float intervalIn)
     {
         float startTime = Time.time;
@@ -144,6 +191,43 @@ public class GazeAwareObject : MonoBehaviour
     public float RetrieveCumulativeTimer()
     {
         return _cumulativeTimer;
+    }
+    
+    public static void SaveLogs()
+    {
+        if (!Directory.Exists (directory)) 
+        {
+            Directory.CreateDirectory (directory);
+        }
+
+        directory += "/";
+        
+        string fileLocation = directory + fileName;
+
+        // Create new file / delete preexisting one.
+        if (File.Exists(fileLocation))
+        {
+            File.Delete(fileLocation);
+        }
+
+        // Write headers
+        using (StreamWriter writer = File.AppendText(fileLocation))
+        {
+            writer.WriteLine(headers);
+        }
+
+        // Write each entry to the file
+        foreach (var gazeObject in LoggingList)
+        {
+            currentEntry = string.Concat(gazeObject.Name + sep + gazeObject.TotalGazeDuration);
+            
+            // Write line to file
+            using StreamWriter writer = File.AppendText(fileLocation);
+            writer.WriteLine(currentEntry);
+        }
+        
+        print("done logging");
+        print(LoggingList.Count + " objects logged");
     }
     
     private void OnDrawGizmos()

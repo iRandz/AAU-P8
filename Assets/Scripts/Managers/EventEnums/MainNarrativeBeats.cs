@@ -5,5 +5,6 @@ public enum MainNarrativeBeats
 	Level1 = 2,
 	Level2 = 3,
 	Level3 = 4,
+	End = 5,
 
 }

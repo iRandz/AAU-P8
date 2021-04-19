@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
+
 [RequireComponent(typeof(Collider))]
 public class ResetPlayerPositionScript : NarrativeEvent
 {
@@ -73,5 +76,9 @@ public class ResetPlayerPositionScript : NarrativeEvent
             default:
                 break;
         }
+        player.SetActive(false);
+        playerTR.position = Destination.position;
+        playerTR.rotation = Destination.rotation;
+        player.SetActive(true);
     }
 }

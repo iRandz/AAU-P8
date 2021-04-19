@@ -33,6 +33,7 @@ public class SingleObjectAttentionScript : MonoBehaviour
             if (!element.played && _gazeAwareObject.RetrieveCumulativeTimer() > minLookTime  && element.timeCondition < _gazeAwareObject.RetrieveCumulativeTimer())
             {
                 DialogueManager.Instance.PlayDialogue(element.dialogueElement);
+                element.played = true;
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEditor;
 
 [System.Serializable]
 public class Sound {
@@ -22,8 +23,12 @@ public class Sound {
     public float spatialBlend;
     public float spatialMinDist = 5f;
     public float spatialMaxDist = 25f;
+
     [Tooltip("Use this to select which object the AudioSource should be applied to, especially in case of spatial sounds.")]
     public GameObject alternativeGameObject; // Add to other gameobject than AudioManager
+
+    [Header("RollOff Type - 0 = Logarithmic, 1 = Linear, 2 = Custom")]
+    public float rollOffIndex = 2f;
 
     [HideInInspector]
     public AudioSource source;

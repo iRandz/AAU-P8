@@ -7,7 +7,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider))]
 public class TriggerEvent : NarrativeEvent
 {
-    [SerializeField][TagSelector][Tooltip("The tag that will be used to compare against. Only objects with this tag will activate the collision event.")]
+    [SerializeField][TagSelector][Tooltip("The tag that will be used to compare against. " +
+                                          "Only objects with this tag will activate the collision event.")]
     private string comparisonTag;
     [SerializeField] private UnityEvent OnCollissionWithTag;
     [SerializeField] private bool RunOnlyOnce;

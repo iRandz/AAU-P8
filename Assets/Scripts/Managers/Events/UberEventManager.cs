@@ -16,12 +16,16 @@ public class UberEventManager : NarrativeEvent
 
     [System.Serializable] public class MainEventContainer
     {
-        [SerializeField] public MainNarrativeBeats narrativeBeat;
+        public MainNarrativeBeats narrativeBeat;
         public SubEventManager subManager;
         public UnityEvent anEvent;
     }
     
     public List<MainEventContainer> mainEvents;
+
+    [Tooltip("The narrative beat which activates the logging. Standard setting is 'End'. " +
+             "Can be used to test logging without playing the game through.")]
+    [SerializeField] private MainNarrativeBeats LoggingBeat = MainNarrativeBeats.End;
     
     
     void Awake()
@@ -54,6 +58,12 @@ public class UberEventManager : NarrativeEvent
                 break;
             }
             mainEvent.subManager.OnDeselected();
+        }
+        
+        UpdateLogs();
+        if (beatIn == LoggingBeat)
+        {
+            SaveLogs();
         }
     }
 }

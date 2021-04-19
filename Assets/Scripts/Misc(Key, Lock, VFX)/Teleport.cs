@@ -11,12 +11,13 @@ public class Teleport : NarrativeEvent
     private CharacterController PlayerCC;
     private Transform Destination;
     
-    
+    [Header("Destinations")]
     [SerializeField] private Transform Object1Destination;
     [SerializeField] private Transform Object2Destination;
     [SerializeField] private Transform SplitDestination;
     [SerializeField] private Transform FlatDestination;
     
+    [Header("Teleport settings")]
     [SerializeField] private float TeleportDelay;
 
     [SerializeField] private UnityEvent PrepareTeleportEvent;

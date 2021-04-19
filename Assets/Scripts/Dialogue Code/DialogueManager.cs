@@ -30,6 +30,7 @@ public class DialogueManager : MonoBehaviour
     
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private Subtitles subtitles;
+    [SerializeField] private bool subtitlesActive = false;
     [FormerlySerializedAs("timeBetweenQueuedVO")] [SerializeField] private float timeBetweenQueuedVo = 1f;
 
     private Queue<DialogueElement> _dialogueElementsQueue;
@@ -37,7 +38,8 @@ public class DialogueManager : MonoBehaviour
 
     private DialogueElement _currentDialogueElement;
     private bool _queueIsRunning;
-    
+
+    private Coroutine _currentCoroutine = null;
 
     // Start is called before the first frame update
     void Start()
@@ -92,7 +94,7 @@ public class DialogueManager : MonoBehaviour
             {
                 //Debug.Log("Important VO: " + dialogueElement + " has interrupted non important VO: " + _currentDialogueElement);
                 audioManager.StopIfPlaying(_currentDialogueElement.voFile);
-                StopCoroutine(IterateDialogueList());
+                StopCoroutine(_currentCoroutine);
                 _queueIsRunning = false;
                 QueueDialogueElementTopAndRemoveNonImportant(dialogueElement);
             }
@@ -117,7 +119,7 @@ public class DialogueManager : MonoBehaviour
         if (_queueIsRunning == false)
         {
             _queueIsRunning = true;
-            StartCoroutine(IterateDialogueList());
+            _currentCoroutine = StartCoroutine(IterateDialogueList());
         }
     }
 
@@ -128,7 +130,7 @@ public class DialogueManager : MonoBehaviour
         if (_queueIsRunning == false)
         {
             _queueIsRunning = true;
-            StartCoroutine(IterateDialogueList());
+            _currentCoroutine = StartCoroutine(IterateDialogueList());
         }
     }
 
@@ -161,7 +163,7 @@ public class DialogueManager : MonoBehaviour
             _currentDialogueElement = dialogueElement;
             if (_currentDialogueElement.triggerEventWithDelayFromStart) _currentDialogueElement.SetStarted(true);
             audioManager.PlaySound(dialogueElement.voFile);
-            StartCoroutine(subtitles.ConvertAndDisplaySubtitles(dialogueElement.subtitleText));
+            if(subtitlesActive) StartCoroutine(subtitles.ConvertAndDisplaySubtitles(dialogueElement.subtitleText));
             yield return new WaitForSeconds(dialogueElement.voFile.source.clip.length + timeBetweenQueuedVo);
             if(_currentDialogueElement.triggerEventAtEnd) _currentDialogueElement.SetEnded(true);
             if (_dialogueElementsList.Count > 0)
