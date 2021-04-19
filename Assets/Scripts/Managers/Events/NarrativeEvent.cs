@@ -122,8 +122,7 @@ public abstract class NarrativeEvent : MonoBehaviour
             writer.WriteLine(currentEntry);
         }
         
-        print("done logging");
-        print(LoggingList.Count + " objects logged");
+        print("done logging timestamps");
     }
 
     public void ChangeMainNarrativeBeat()

@@ -138,12 +138,6 @@ public class GazeAwareObject : MonoBehaviour
     }
 
     // Private functions
-    [ContextMenu("Log")]
-    private void Test()
-    {
-        SaveLogs();
-    }
-
     private void UpdateLoggingValues()
     {
         foreach (var gazeObject in LoggingList)
