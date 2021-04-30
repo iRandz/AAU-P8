@@ -121,8 +121,6 @@ public abstract class NarrativeEvent : MonoBehaviour
             using StreamWriter writer = File.AppendText(fileLocation);
             writer.WriteLine(currentEntry);
         }
-        
-        print("done logging timestamps");
     }
 
     public void ChangeMainNarrativeBeat()

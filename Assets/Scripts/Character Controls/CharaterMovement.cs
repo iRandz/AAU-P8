@@ -11,11 +11,14 @@ public class CharaterMovement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float gravity = -9.81f;
 
+    private Transform thisTrans;
     private Vector3 velocity;
+    
     // Start is called before the first frame update
     void Start()
     {
         velocity = new Vector3(0, gravity, 0);
+        thisTrans = transform;
     }
 
     // Update is called once per frame
@@ -23,9 +26,9 @@ public class CharaterMovement : MonoBehaviour
     {
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
-        Vector3 moveBy = transform.right * x + transform.forward * z;
+        Vector3 moveBy = thisTrans.right * x + thisTrans.forward * z;
 
-        controller.Move(moveBy * speed * Time.deltaTime);
+        controller.Move(moveBy * (speed * Time.deltaTime));
 
         controller.Move(velocity);
     }

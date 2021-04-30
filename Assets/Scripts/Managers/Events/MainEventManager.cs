@@ -93,7 +93,7 @@ public class MainEventManager : MonoBehaviour
                 {
                     _setup.Invoke();
                     _setupHasBeenRun = true;
-                    Debug.Log("Story State: setup");
+                    //Debug.Log("Story State: setup");
                 }
                 break;
             case 1:
@@ -101,7 +101,7 @@ public class MainEventManager : MonoBehaviour
                 {
                     _intro.Invoke();
                     _introHasBeenRun = true;
-                    Debug.Log("Story State: Intro");
+                    //Debug.Log("Story State: Intro");
                 }
                 break;
             case 2:
@@ -109,7 +109,7 @@ public class MainEventManager : MonoBehaviour
                 {
                     _firstSegment.Invoke();
                     _firstSegmentHasBeenRun = true;
-                    Debug.Log("Story State: firstSegment");
+                    //Debug.Log("Story State: firstSegment");
                 }
                 break;
             case 3:
@@ -117,7 +117,7 @@ public class MainEventManager : MonoBehaviour
                 {
                     _firstToSecond.Invoke();
                     _firstToSecondHasBeenRun = true;
-                    Debug.Log("Story State: firstToSecond");
+                    //Debug.Log("Story State: firstToSecond");
                 }
                 break;
             case 4:
@@ -125,7 +125,7 @@ public class MainEventManager : MonoBehaviour
                 {
                     _secondSegment.Invoke();
                     _secondSegmentHasBeenRun = true;
-                    Debug.Log("Story State: secondSegment");
+                    //Debug.Log("Story State: secondSegment");
                 }
                 break;
             case 5:
@@ -133,7 +133,7 @@ public class MainEventManager : MonoBehaviour
                 {
                     _secondToThird.Invoke();
                     _secondToThirdHasBeenRun = true;
-                    Debug.Log("Story State: secondToThird");
+                    //Debug.Log("Story State: secondToThird");
                 }
                 break;
             case 6:
@@ -141,7 +141,7 @@ public class MainEventManager : MonoBehaviour
                 {
                     _thirdSegment.Invoke();
                     _thirdSegmentHasBeenRun = true;
-                    Debug.Log("Story State: thirdSegment");
+                    //Debug.Log("Story State: thirdSegment");
                 }
                 break;
             case 7:
@@ -149,7 +149,7 @@ public class MainEventManager : MonoBehaviour
                 {
                     _ThirdToEnd.Invoke();
                     _thirdToEndHasBeenRun = true;
-                    Debug.Log("Story State: thirdToEnd");
+                    //Debug.Log("Story State: thirdToEnd");
                 }
                 break;
             case 8:
@@ -157,11 +157,11 @@ public class MainEventManager : MonoBehaviour
                 {
                     _theEnd.Invoke();
                     _theEndHasBeenRun = true;
-                    Debug.Log("Story State: theEnd");
+                    //Debug.Log("Story State: theEnd");
                 }
                 break;
             default:
-                Debug.Log("Story State: Something went wrong...");
+                //Debug.Log("Story State: Something went wrong...");
                 break;
         }
     }

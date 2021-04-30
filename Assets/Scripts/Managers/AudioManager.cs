@@ -38,7 +38,7 @@ public class AudioManager : MonoBehaviour
             //Debug.Log("No sound with name: " + s.name + " sound is now being registered using RegisterSound()");
             RegisterSound(s);
         }
-        Debug.Log("Playing Sound: " + s.name + ".");
+        //Debug.Log("Playing Sound: " + s.name + ".");
         s.source.Play();
     }
 
@@ -50,7 +50,7 @@ public class AudioManager : MonoBehaviour
             RegisterSound(s);
         }
         s.source.Play();
-        Debug.Log("Sound: " + s.name + " has been played");
+        //Debug.Log("Sound: " + s.name + " has been played");
     }
 
     public void StopIfPlaying(string soundName)
@@ -58,7 +58,7 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == soundName);
         if (s == null)
         {
-            Debug.LogWarning("Sound: " + soundName + " not found!");
+            //Debug.LogWarning("Sound: " + soundName + " not found!");
             return;
         }
 
@@ -72,7 +72,7 @@ public class AudioManager : MonoBehaviour
     {
         if (s == null)
         {
-            Debug.LogWarning("Sound: " + s.name + " not found!");
+            //Debug.LogWarning("Sound: " + s.name + " not found!");
             return;
         }
 
@@ -88,7 +88,7 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == soundName);
         if (s == null)
         {
-            Debug.LogWarning("Sound: " + s.name + " not found!");
+            //Debug.LogWarning("Sound: " + s.name + " not found!");
             return;
         }
         //Debug.Log("Sound Queued: " + s.name + ".");
@@ -103,7 +103,7 @@ public class AudioManager : MonoBehaviour
     {
         if (s == null)
         {
-            Debug.LogWarning("Sound: " + s.name + " not found!");
+            //Debug.LogWarning("Sound: " + s.name + " not found!");
             return;
         }
         //Debug.Log("Sound Queued: " + s.name + ".");
@@ -120,7 +120,7 @@ public class AudioManager : MonoBehaviour
         Sound[] s = Array.FindAll(sounds, sound => sound.tag == soundTag);
         if (s.Length == 0)
         {
-            Debug.LogWarning("Sounds with tag: " + soundTag + " not found!");
+            //Debug.LogWarning("Sounds with tag: " + soundTag + " not found!");
             return;
         }
         s[UnityEngine.Random.Range(0, s.Length)].source.Play();
@@ -131,7 +131,7 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == soundName);
         if (s == null)
         {
-            Debug.LogWarning("Sound: " + soundName + " not found!");
+            //Debug.LogWarning("Sound: " + soundName + " not found!");
             return;
         }
         
@@ -145,7 +145,7 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == soundName);
         if (s == null)
         {
-            Debug.LogWarning("Sound: " + soundName + " not found!");
+            //Debug.LogWarning("Sound: " + soundName + " not found!");
             return;
         }
 
@@ -158,7 +158,7 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == soundName);
         if (s == null)
         {
-            Debug.LogWarning("Sound: " + soundName + " not found!");
+            //Debug.LogWarning("Sound: " + soundName + " not found!");
             return;
         }
         
@@ -171,7 +171,7 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == soundName);
         if (s == null)
         {
-            Debug.LogWarning("Sound: " + soundName + " not found!");
+            //Debug.LogWarning("Sound: " + soundName + " not found!");
             return;
         }
 
@@ -220,7 +220,7 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == soundName);
         if (s == null)
         {
-            Debug.LogWarning("Sound: " + soundName + " not found!");
+            //Debug.LogWarning("Sound: " + soundName + " not found!");
             return false;
         }
         return s.source.isPlaying;

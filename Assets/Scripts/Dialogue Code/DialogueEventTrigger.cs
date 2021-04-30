@@ -30,7 +30,7 @@ public class DialogueEventTrigger : NarrativeEvent
         if (dialogueElement.GetEnded() && dialogueElement.triggerEventAtEnd && !eventRun)
         {
             dialogueEvents.Invoke();
-            Debug.Log("END");
+            //Debug.Log("END");
             eventRun = true;
         }
     }
@@ -51,7 +51,7 @@ public class DialogueEventTrigger : NarrativeEvent
         if (dialogueElement.triggerEventAtEnd || dialogueElement.triggerEventWithDelayFromStart)
         {
             dialogueEvents.Invoke();
-            Debug.Log("DELAY");
+            //Debug.Log("DELAY");
         }
     }
     

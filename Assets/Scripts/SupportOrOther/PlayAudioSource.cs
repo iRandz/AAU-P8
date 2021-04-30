@@ -25,7 +25,7 @@ public class PlayAudioSource : MonoBehaviour
         if (audioSource != null)
         {
             audioSource.Play();
-            Debug.Log("Audiosource on " + this.gameObject.name + " has been played.");
+            //Debug.Log("Audiosource on " + this.gameObject.name + " has been played.");
         }
     }
 }

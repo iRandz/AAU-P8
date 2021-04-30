@@ -220,8 +220,6 @@ public class GazeAwareObject : MonoBehaviour
             writer.WriteLine(currentEntry);
         }
         
-        print("done logging");
-        print(LoggingList.Count + " objects logged");
     }
     
     private void OnDrawGizmos()

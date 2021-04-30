@@ -10,7 +10,7 @@ public class Teleport : NarrativeEvent
     private Transform PlayerTr;
     private CharacterController PlayerCC;
     private Transform Destination;
-    
+
     [Header("Destinations")]
     [SerializeField] private Transform Object1Destination;
     [SerializeField] private Transform Object2Destination;
@@ -19,6 +19,8 @@ public class Teleport : NarrativeEvent
     
     [Header("Teleport settings")]
     [SerializeField] private float TeleportDelay;
+    [SerializeField] private int FadeTime;
+    [SerializeField] private UI_Controler UIContr;
 
     [SerializeField] private UnityEvent PrepareTeleportEvent;
     [SerializeField] private UnityEvent TeleportEvent;
@@ -33,12 +35,16 @@ public class Teleport : NarrativeEvent
     private IEnumerator DelayedTeleport()
     {
         yield return new WaitForSeconds(TeleportDelay);
+        var routine = StartCoroutine(UIContr.FadeToFromBlack(true, FadeTime));
+        yield return new WaitForSeconds(FadeTime);
         TeleportEvent.Invoke();
         Player.SetActive(false);
         PlayerTr.position = Destination.position;
         PlayerTr.rotation = Destination.rotation;
         Player.SetActive(true);
         PlayerCC.enabled = true;
+        StopCoroutine(routine);
+        StartCoroutine(UIContr.FadeToFromBlack(false, FadeTime));
     }
     
     public void TeleportStart()
@@ -60,6 +66,10 @@ public class Teleport : NarrativeEvent
                 Destination = SplitDestination;
                 break;
         }
+        
+        Player.SetActive(false);
+        PlayerTr.position = new Vector3(transform.position.x, PlayerTr.position.y, transform.position.z);
+        Player.SetActive(true);
         
         PrepareTeleportEvent.Invoke();
         PlayerCC.enabled = false;

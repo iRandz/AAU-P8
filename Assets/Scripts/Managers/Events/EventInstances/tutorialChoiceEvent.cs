@@ -15,7 +15,7 @@ public class tutorialChoiceEvent : NarrativeEvent
     {
         if (lookedAtForSec > lookedAtTargetInSec && !eventRun)
         {
-            Debug.Log("gase");
+            //Debug.Log("gase");
             //ChangeMainNarrativeBeat();
             terminateEvent.Invoke();
             eventRun = true;

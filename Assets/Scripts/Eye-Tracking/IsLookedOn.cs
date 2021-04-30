@@ -25,17 +25,5 @@ public class IsLookedOn : MonoBehaviour
 	{
 		_gazeAwareComponent = GetComponent<GazeAware>();
 	}
-
-	/// <summary>
-	/// Lerping the color
-	/// </summary>
-	void Update()
-	{
-		// Change the color of the cube
-		if (_gazeAwareComponent.HasGazeFocus)
-		{
-			Debug.Log("kig");
-		}
-
-	}
+	
 }
