@@ -30,6 +30,14 @@ public class ResetPlayerPositionScript : NarrativeEvent
         playerTR = player.GetComponent<Transform>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown("i"))
+        {
+            ResetPayerPosition();
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(compareTag))
